@@ -22,6 +22,7 @@ public class GameStatusCommand implements CommandExecutor {
             commandSender.sendMessage(ChatColor.RED+"Game status:");
             commandSender.sendMessage(ChatColor.RED+"Game mode: "+ HiplayDragon.instance.gameCfg.getDragonMode().toString());
             commandSender.sendMessage(ChatColor.RED+"Progress: "+ HiplayDragon.instance.gameCfg.getMobProgress());
+            commandSender.sendMessage(ChatColor.RED+"Destroyed cristal: "+ HiplayDragon.instance.destroyedCrystalList.size());
         }
         return true;
     }

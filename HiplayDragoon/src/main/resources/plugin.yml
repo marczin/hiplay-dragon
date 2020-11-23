@@ -2,15 +2,12 @@ name: HiPlayDragon
 main: pl.marcinrosol.HiplayDragon.HiplayDragon
 version: 1.0
 commands:
-  dragon:
-    description: Spawn dragon
-    usage: "use /dragon"
+  spawn:
+    description: Spawn dragon or crystal
+    usage: "use /spawn"
   killdragon:
     description: Kill dragon
     usage: "use /killdragon"
   status:
     description: Game status
     usage: "use /status"
-  crystal:
-    description: Spawn ender crystal
-    usage: "use /crystal"

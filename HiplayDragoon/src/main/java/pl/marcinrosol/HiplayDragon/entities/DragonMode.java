@@ -1,5 +1,5 @@
 package pl.marcinrosol.HiplayDragon.entities;
 
 public enum DragonMode {
-    DRAGON,MOB
+    DRAGON,MOB,END_GAME
 }

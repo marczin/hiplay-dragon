@@ -15,7 +15,8 @@ public class CrystalDestroyListener implements Listener {
     @EventHandler
     public void onCrystalDestroy(ExplosionPrimeEvent event){
         if(event.getEntity() instanceof EnderCrystal){
-            HiplayDragon.instance.destroyedCrystals.add(new DestroyedCrystal(event.getEntity().getLocation()));
+            HiplayDragon.instance.destroyedCrystalList.add(new DestroyedCrystal(event.getEntity().getLocation()));
+            Bukkit.broadcastMessage("Zniszcozno krysztal");
         }
     }
 }

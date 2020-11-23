@@ -20,13 +20,13 @@ public class PlayerKillMobListener implements Listener {
         if(event.getEntity() instanceof Monster){
             if(HiplayDragon.instance.gameCfg.getDragonMode() == DragonMode.MOB){
                 HiplayDragon.instance.gameCfg.incrementMobProgress();
-                if (HiplayDragon.instance.gameCfg.getMobProgress() % HiplayDragon.instance.gameCfg.getMaxMobKillProgress() == 0){
-                    for(Entity e : event.getEntity().getWorld().getEntities()) {
-                        if (e instanceof EnderDragon){
-                            ((EnderDragon) e).setHealth(((EnderDragon) e).getHealth() - 10);
-                        }
-                    }
-                }
+//                if (HiplayDragon.instance.gameCfg.getMobProgress() % HiplayDragon.instance.gameCfg.getMaxMobKillProgress() == 0){
+//                    for(Entity e : event.getEntity().getWorld().getEntities()) {
+//                        if (e instanceof EnderDragon){
+//                            ((EnderDragon) e).setHealth(((EnderDragon) e).getHealth() - 10);
+//                        }
+//                    }
+//                }
                 changeMode();
             }
         }

@@ -15,22 +15,21 @@ import java.util.List;
 public final class SpawnCrystalTask {
 
     public static void crystalTask() {
-        Bukkit.getScheduler().runTaskAsynchronously(HiplayDragon.instance, () -> {
-            for (; ; ) {
+        Bukkit.getScheduler().runTaskTimerAsynchronously(HiplayDragon.instance, () -> {
                 try {
                     checkCrystalLife();
                     Thread.sleep((20L));
                 } catch (InterruptedException interruptedException) {
                     interruptedException.printStackTrace();
                 }
-            }
 
-        });
+        }, 0, 20L);
     }
 
     private static void checkCrystalLife() {
-        for (DestroyedCrystal dc : HiplayDragon.instance.destroyedCrystals) {
-            long diffTime = (new Date().getTime() - dc.getDate().getTime()) / (60 * 1000) % 60;
+        Date currentDate = new Date();
+        for (DestroyedCrystal dc : HiplayDragon.instance.destroyedCrystalList) {
+            long diffTime = (currentDate.getTime() - dc.getDate().getTime()) / (60 * 1000) % 60;
             if (diffTime >= CrystalCfg.get().getInt("crystal.respawn.time")) {
                 Bukkit.getScheduler().runTask(HiplayDragon.instance, () -> {
                     dc.setDestroyed(false);
@@ -39,9 +38,9 @@ public final class SpawnCrystalTask {
             }
         }
         List<DestroyedCrystal> operatedList = new ArrayList<>();
-        HiplayDragon.instance.destroyedCrystals.stream().filter(item -> !item.isDestroyed())
+        HiplayDragon.instance.destroyedCrystalList.stream().filter(item -> !item.isDestroyed())
                 .forEach(item -> operatedList.add(item));
-        HiplayDragon.instance.destroyedCrystals.removeAll(operatedList);
+        HiplayDragon.instance.destroyedCrystalList.removeAll(operatedList);
     }
 
     private static void spawnCrystal(Location location){
