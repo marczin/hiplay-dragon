@@ -8,6 +8,7 @@ import pl.marcinrosol.HiplayDragon.entities.CrystalCfg;
 import pl.marcinrosol.HiplayDragon.entities.DestroyedCrystal;
 import pl.marcinrosol.HiplayDragon.entities.GameCfg;
 import pl.marcinrosol.HiplayDragon.listeners.*;
+import pl.marcinrosol.HiplayDragon.tasks.DragonModeTask;
 import pl.marcinrosol.HiplayDragon.tasks.SpawnCrystalTask;
 
 import java.util.ArrayList;

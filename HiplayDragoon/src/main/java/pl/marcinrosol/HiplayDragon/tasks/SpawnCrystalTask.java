@@ -29,12 +29,12 @@ public final class SpawnCrystalTask {
     private static void checkCrystalLife() {
         Date currentDate = new Date();
         for (DestroyedCrystal dc : HiplayDragon.instance.destroyedCrystalList) {
-            long diffTime = (currentDate.getTime() - dc.getDate().getTime()) / (60 * 1000) % 60;
-            if (diffTime >= CrystalCfg.get().getInt("crystal.respawn.time")) {
-                Bukkit.getScheduler().runTask(HiplayDragon.instance, () -> {
+            if(dc.isDestroyed()) {
+                long diffTime = (currentDate.getTime() - dc.getDate().getTime()) / (60 * 1000) % 60;
+                if (diffTime >= CrystalCfg.get().getInt("crystal.respawn.time")) {
                     dc.setDestroyed(false);
-                    spawnCrystal(dc.getLocation());
-                });
+                    Bukkit.getScheduler().runTask(HiplayDragon.instance, () -> spawnCrystal(dc.getLocation()));
+                }
             }
         }
         List<DestroyedCrystal> operatedList = new ArrayList<>();

@@ -6,3 +6,4 @@ event:
     maxDragonHealth: 200
     dragonName: Kiedy HiPlay
     dragonMode: MOB
+    howManyMobKill: 20

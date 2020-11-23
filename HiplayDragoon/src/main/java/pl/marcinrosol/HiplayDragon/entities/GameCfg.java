@@ -2,8 +2,6 @@ package pl.marcinrosol.HiplayDragon.entities;
 
 import pl.marcinrosol.HiplayDragon.HiplayDragon;
 
-import java.util.Observable;
-
 public class GameCfg{
 
     int mobProgress;
@@ -11,6 +9,7 @@ public class GameCfg{
     int maxDragonHealth;
     String dragonName;
     DragonMode dragonMode;
+    int howManyMobKill;
 
     public GameCfg() {
         this.mobProgress = HiplayDragon.instance.config.getInt("event.killMobProgress");
@@ -18,6 +17,15 @@ public class GameCfg{
         this.maxDragonHealth = HiplayDragon.instance.config.getInt("event.maxDragonHealth");
         this.dragonName = HiplayDragon.instance.config.getString("event.dragonName");
         this.dragonMode = DragonMode.valueOf(HiplayDragon.instance.config.getString("event.dragonMode"));
+        this.howManyMobKill = HiplayDragon.instance.config.getInt("event.howManyMobKill");
+    }
+
+    public int getHowManyMobKill() {
+        return howManyMobKill;
+    }
+
+    public void setHowManyMobKill(int howManyMobKill) {
+        this.howManyMobKill = howManyMobKill;
     }
 
     public int getMobProgress() {

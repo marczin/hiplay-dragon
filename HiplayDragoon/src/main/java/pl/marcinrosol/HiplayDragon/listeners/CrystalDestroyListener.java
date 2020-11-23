@@ -8,8 +8,6 @@ import org.bukkit.event.entity.ExplosionPrimeEvent;
 import pl.marcinrosol.HiplayDragon.HiplayDragon;
 import pl.marcinrosol.HiplayDragon.entities.DestroyedCrystal;
 
-import java.util.Date;
-
 public class CrystalDestroyListener implements Listener {
 
     @EventHandler

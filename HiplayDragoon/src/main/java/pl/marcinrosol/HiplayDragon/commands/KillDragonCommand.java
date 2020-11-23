@@ -6,7 +6,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import pl.marcinrosol.HiplayDragon.HiplayDragon;
 
 public class KillDragonCommand implements CommandExecutor {
 

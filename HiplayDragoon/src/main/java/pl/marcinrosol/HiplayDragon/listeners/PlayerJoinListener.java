@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import pl.marcinrosol.HiplayDragon.HiplayDragon;
+import pl.marcinrosol.HiplayDragon.entities.DragonMode;
 
 public class PlayerJoinListener implements Listener {
 
@@ -20,8 +21,12 @@ public class PlayerJoinListener implements Listener {
 
     static void preparePlayer(Player player){
         if(!(player instanceof Player)) return;
-        player.setGameMode(GameMode.SURVIVAL);
-        setInventory(player);
+        if(HiplayDragon.instance.gameCfg.getDragonMode() == DragonMode.END_GAME){
+            player.setGameMode(GameMode.ADVENTURE);
+        }else{
+            player.setGameMode(GameMode.SURVIVAL);
+            setInventory(player);
+        }
     }
 
     private static void setInventory(Player player){
