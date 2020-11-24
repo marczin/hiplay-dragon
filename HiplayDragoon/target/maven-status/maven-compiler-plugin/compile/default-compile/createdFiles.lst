@@ -2,6 +2,7 @@ pl\marcinrosol\HiplayDragon\commands\KillDragonCommand.class
 pl\marcinrosol\HiplayDragon\HiplayDragon.class
 pl\marcinrosol\HiplayDragon\tasks\DragonModeTask.class
 pl\marcinrosol\HiplayDragon\entities\DragonMode.class
+pl\marcinrosol\HiplayDragon\tasks\UpdateScoreboardTask.class
 pl\marcinrosol\HiplayDragon\listeners\DragonGetDamageListener.class
 pl\marcinrosol\HiplayDragon\entities\GameCfg.class
 pl\marcinrosol\HiplayDragon\commands\GameStatusCommand.class
