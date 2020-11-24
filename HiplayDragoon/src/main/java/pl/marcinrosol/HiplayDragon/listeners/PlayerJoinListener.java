@@ -1,5 +1,6 @@
 package pl.marcinrosol.HiplayDragon.listeners;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -17,6 +18,7 @@ public class PlayerJoinListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event){
         preparePlayer(event.getPlayer());
         event.getPlayer().sendMessage(HiplayDragon.instance.config.getString("message.hello"));
+        event.getPlayer().setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
     }
 
     static void preparePlayer(Player player){

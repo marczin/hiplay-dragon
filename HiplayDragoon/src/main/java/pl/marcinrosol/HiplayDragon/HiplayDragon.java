@@ -3,6 +3,7 @@ package pl.marcinrosol.HiplayDragon;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.*;
@@ -11,11 +12,8 @@ import pl.marcinrosol.HiplayDragon.entities.CrystalCfg;
 import pl.marcinrosol.HiplayDragon.entities.DestroyedCrystal;
 import pl.marcinrosol.HiplayDragon.entities.GameCfg;
 import pl.marcinrosol.HiplayDragon.listeners.*;
-import pl.marcinrosol.HiplayDragon.tasks.DragonModeTask;
 import pl.marcinrosol.HiplayDragon.tasks.SpawnCrystalTask;
-import pl.marcinrosol.HiplayDragon.tasks.UpdateScoreboardTask;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -25,8 +23,6 @@ public class HiplayDragon extends JavaPlugin {
     public FileConfiguration config = getConfig();
     public GameCfg gameCfg;
     public List<DestroyedCrystal> destroyedCrystalList = new CopyOnWriteArrayList<>();
-    public ScoreboardManager scoreboardManager;
-    public Scoreboard scoreboard;
     public Objective objective;
 
     @Override
@@ -65,11 +61,15 @@ public class HiplayDragon extends JavaPlugin {
     }
 
     private void prepareScoreboard(){
-        this.scoreboardManager = Bukkit.getScoreboardManager();
-        this.scoreboard = scoreboardManager.getMainScoreboard();
-        this.objective = scoreboard.registerNewObjective("DragonBoard", "dummy");
-        objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-        objective.setDisplayName("HiPlay Dragon event");
+        ScoreboardManager  scoreboardManager = Bukkit.getScoreboardManager();
+        Scoreboard scoreboard = scoreboardManager.getMainScoreboard();
+
+        if(objective == null ){
+            objective = scoreboard.registerNewObjective("DragonBoard", "dummy");
+            objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+            objective.setDisplayName("HiPlay Dragon event");
+        }
+
         Score mobKilled = objective.getScore(ChatColor.RED + "Mob killed: "+(gameCfg.getMobProgress()-1));
         mobKilled.setScore(1);
     }
