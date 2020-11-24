@@ -16,6 +16,7 @@ public final class DragonModeTask {
                     HiplayDragon.instance.gameCfg.setDragonMode(DragonMode.MOB);
                     Bukkit.broadcastMessage("Changed to MOB mode");
             }
+            HiplayDragon.instance.gameCfg.setUpdateScoreboard(true);
         },20L * 60);
     }
 

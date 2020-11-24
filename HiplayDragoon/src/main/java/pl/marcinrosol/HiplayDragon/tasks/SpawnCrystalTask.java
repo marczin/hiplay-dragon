@@ -41,6 +41,7 @@ public final class SpawnCrystalTask {
         HiplayDragon.instance.destroyedCrystalList.stream().filter(item -> !item.isDestroyed())
                 .forEach(item -> operatedList.add(item));
         HiplayDragon.instance.destroyedCrystalList.removeAll(operatedList);
+        HiplayDragon.instance.gameCfg.setUpdateScoreboard(true);
     }
 
     private static void spawnCrystal(Location location){

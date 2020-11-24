@@ -29,6 +29,7 @@ public class PlayerKillMobListener implements Listener {
                 HiplayDragon.instance.gameCfg.incrementMobProgress();
                 changeMode();
             }
+            HiplayDragon.instance.gameCfg.setUpdateScoreboard(true);
         }
     }
 

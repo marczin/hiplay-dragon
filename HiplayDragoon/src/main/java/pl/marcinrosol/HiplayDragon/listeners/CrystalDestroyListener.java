@@ -1,6 +1,5 @@
 package pl.marcinrosol.HiplayDragon.listeners;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.EnderCrystal;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,7 +13,7 @@ public class CrystalDestroyListener implements Listener {
     public void onCrystalDestroy(ExplosionPrimeEvent event){
         if(event.getEntity() instanceof EnderCrystal){
             HiplayDragon.instance.destroyedCrystalList.add(new DestroyedCrystal(event.getEntity().getLocation()));
-            Bukkit.broadcastMessage("Zniszcozno krysztal");
+            HiplayDragon.instance.gameCfg.setUpdateScoreboard(true);
         }
     }
 }

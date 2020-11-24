@@ -3,7 +3,6 @@ package pl.marcinrosol.HiplayDragon;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.*;
@@ -11,8 +10,10 @@ import pl.marcinrosol.HiplayDragon.commands.*;
 import pl.marcinrosol.HiplayDragon.entities.CrystalCfg;
 import pl.marcinrosol.HiplayDragon.entities.DestroyedCrystal;
 import pl.marcinrosol.HiplayDragon.entities.GameCfg;
+import pl.marcinrosol.HiplayDragon.entities.ScoreboardCfg;
 import pl.marcinrosol.HiplayDragon.listeners.*;
 import pl.marcinrosol.HiplayDragon.tasks.SpawnCrystalTask;
+import pl.marcinrosol.HiplayDragon.tasks.UpdateScoreboardTask;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -34,7 +35,8 @@ public class HiplayDragon extends JavaPlugin {
         CrystalCfg.setup();
         CrystalCfg.get().options().copyDefaults(true);
         SpawnCrystalTask.crystalTask();
-        prepareScoreboard();
+        ScoreboardCfg.prepareScoreboard();
+        UpdateScoreboardTask.UpdateScoreboardTask();
         System.out.println("HiPlay Dragon enabled");
     }
 
@@ -60,18 +62,6 @@ public class HiplayDragon extends JavaPlugin {
         getCommand("spawn").setExecutor(new SpawnCommand());
     }
 
-    private void prepareScoreboard(){
-        ScoreboardManager  scoreboardManager = Bukkit.getScoreboardManager();
-        Scoreboard scoreboard = scoreboardManager.getMainScoreboard();
 
-        if(objective == null ){
-            objective = scoreboard.registerNewObjective("DragonBoard", "dummy");
-            objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-            objective.setDisplayName("HiPlay Dragon event");
-        }
-
-        Score mobKilled = objective.getScore(ChatColor.RED + "Mob killed: "+(gameCfg.getMobProgress()-1));
-        mobKilled.setScore(1);
-    }
 
 }

@@ -10,6 +10,7 @@ public class GameCfg{
     String dragonName;
     DragonMode dragonMode;
     int howManyMobKill;
+    boolean updateScoreboard;
 
     public GameCfg() {
         this.mobProgress = HiplayDragon.instance.config.getInt("event.killMobProgress");
@@ -18,6 +19,15 @@ public class GameCfg{
         this.dragonName = HiplayDragon.instance.config.getString("event.dragonName");
         this.dragonMode = DragonMode.valueOf(HiplayDragon.instance.config.getString("event.dragonMode"));
         this.howManyMobKill = HiplayDragon.instance.config.getInt("event.howManyMobKill");
+        this.updateScoreboard = true;
+    }
+
+    public boolean isUpdateScoreboard() {
+        return updateScoreboard;
+    }
+
+    public void setUpdateScoreboard(boolean updateScoreboard) {
+        this.updateScoreboard = updateScoreboard;
     }
 
     public int getHowManyMobKill() {
