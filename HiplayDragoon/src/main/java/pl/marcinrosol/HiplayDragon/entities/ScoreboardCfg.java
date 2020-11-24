@@ -22,31 +22,33 @@ public class ScoreboardCfg {
         updateScoreboard();
     }
 
-    public static void updateScoreboard(){
-        if(HiplayDragon.instance.gameCfg.isUpdateScoreboard()){
-            for(String name : HiplayDragon.instance.objective.getScoreboard().getEntries()){
+    public static void removeScore(String currName, int currPos) {
+        for(String name : HiplayDragon.instance.objective.getScoreboard().getEntries()){
+            if ( name != currName ) {
                 Score currScore = HiplayDragon.instance.objective.getScore(name);
-                System.out.println("name " +name+ " score: "+currScore.getScore());
-                if(currScore.getScore() == 1){
-                    String searchedName = (ChatColor.RED+"Zabite moby: "+ChatColor.GOLD+HiplayDragon.instance.gameCfg.getMobProgress()+"/"+HiplayDragon.instance.gameCfg.getHowManyMobKill());
-                    System.out.println("searched name "+ searchedName);
-                    if(name != searchedName){
-                        HiplayDragon.instance.objective.getScoreboard().resetScores(name);
-                        HiplayDragon.instance.objective.getScore(searchedName).setScore(1);
-                    }
+                if ( currScore != null && currScore.getScore() == currPos ) {
+                    HiplayDragon.instance.objective.getScoreboard().resetScores(name);
                 }
-
-                if(currScore.getScore() == 2){
-                    String searchedName = (ChatColor.RED+"Zniszczone krysztaly: "+ChatColor.GOLD+HiplayDragon.instance.destroyedCrystalList.size());
-                    if(name != searchedName){
-                        HiplayDragon.instance.objective.getScoreboard().resetScores(name);
-                        HiplayDragon.instance.objective.getScore(searchedName).setScore(2);
-                    }
-                }
-
             }
         }
-        HiplayDragon.instance.gameCfg.setUpdateScoreboard(false);
+    }
+
+    public static void updateScoreboard(){
+        if(HiplayDragon.instance.gameCfg.isUpdateScoreboard()){
+            //params
+            String name = null;
+
+            // 1
+            name = (ChatColor.RED+"Zabite moby: "+ChatColor.GOLD+HiplayDragon.instance.gameCfg.getMobProgress()+"/"+HiplayDragon.instance.gameCfg.getHowManyMobKill());
+            removeScore(name, 1);
+            HiplayDragon.instance.objective.getScore(name).setScore(1);
+
+            name = (ChatColor.RED+"Zniszczone krysztaly: "+ChatColor.GOLD+HiplayDragon.instance.destroyedCrystalList.size());
+            removeScore(name, 2);
+            HiplayDragon.instance.objective.getScore(name).setScore(2);
+
+            HiplayDragon.instance.gameCfg.setUpdateScoreboard(false);
+        }
     }
 
 }
