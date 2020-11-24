@@ -9,7 +9,7 @@ public class UpdateScoreboardTask {
     public static void UpdateScoreboardTask(){
         Bukkit.getScheduler().scheduleSyncRepeatingTask(HiplayDragon.instance, () -> {
             if(HiplayDragon.instance.gameCfg.isUpdateScoreboard()){
-                ScoreboardCfg.updateScoreboard();
+                ScoreboardCfg.updateScoreboard(HiplayDragon.instance);
             }
         }, 0L, 20L);
     }

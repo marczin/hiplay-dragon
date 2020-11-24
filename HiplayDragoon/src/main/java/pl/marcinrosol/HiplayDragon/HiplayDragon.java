@@ -35,7 +35,7 @@ public class HiplayDragon extends JavaPlugin {
         CrystalCfg.setup();
         CrystalCfg.get().options().copyDefaults(true);
         SpawnCrystalTask.crystalTask();
-        ScoreboardCfg.prepareScoreboard();
+        ScoreboardCfg.prepareScoreboard(this);
         UpdateScoreboardTask.UpdateScoreboardTask();
         System.out.println("HiPlay Dragon enabled");
     }
