@@ -9,36 +9,44 @@ import pl.marcinrosol.HiplayDragon.HiplayDragon;
 
 public class ScoreboardCfg {
 
-    public static void prepareScoreboard(HiplayDragon instance){
+    public static void prepareScoreboard(){
         Scoreboard scoreboard =  Bukkit.getScoreboardManager().getMainScoreboard();
-        instance.objective = scoreboard.getObjective("dragonboard");
-        if(instance.objective != null ) HiplayDragon.instance.objective.unregister();
-        instance.objective = null;
-        if(instance.objective == null ){
-            instance.objective = scoreboard.registerNewObjective("dragonboard", "dummy");
-            instance.objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-            instance.objective.setDisplayName("HiPlay");
+        HiplayDragon.instance.objective = scoreboard.getObjective("dragonboard");
+        if(HiplayDragon.instance.objective != null ) HiplayDragon.instance.objective.unregister();
+        HiplayDragon.instance.objective = null;
+        if(HiplayDragon.instance.objective == null ){
+            HiplayDragon.instance.objective = scoreboard.registerNewObjective("dragonboard", "dummy");
+            HiplayDragon.instance.objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+            HiplayDragon.instance.objective.setDisplayName("HiPlay");
         }
-        updateScoreboard(instance);
+        updateScoreboard();
     }
 
-    public static void updateScoreboard(HiplayDragon main){
-        if(main.gameCfg.isUpdateScoreboard()){
-            for(String name : main.objective.getScoreboard().getEntries()){
-                Score currScore = main.objective.getScore(name );
-
+    public static void updateScoreboard(){
+        if(HiplayDragon.instance.gameCfg.isUpdateScoreboard()){
+            for(String name : HiplayDragon.instance.objective.getScoreboard().getEntries()){
+                Score currScore = HiplayDragon.instance.objective.getScore(name);
+                System.out.println("name " +name+ " score: "+currScore.getScore());
                 if(currScore.getScore() == 1){
-                    String searchedName = (ChatColor.RED+"Zabite moby: "+ChatColor.GOLD+main.gameCfg.getMobProgress()+"/"+main.gameCfg.getHowManyMobKill());
+                    String searchedName = (ChatColor.RED+"Zabite moby: "+ChatColor.GOLD+HiplayDragon.instance.gameCfg.getMobProgress()+"/"+HiplayDragon.instance.gameCfg.getHowManyMobKill());
+                    System.out.println("searched name "+ searchedName);
+                    if(name != searchedName){
+                        HiplayDragon.instance.objective.getScoreboard().resetScores(name);
+                        HiplayDragon.instance.objective.getScore(searchedName).setScore(1);
+                    }
+                }
 
-                    if(currScore != main.objective.getScore(searchedName)){
-                        main.objective.getScoreboard().resetScores(name);
-                        main.objective.getScore(searchedName).setScore(1);
+                if(currScore.getScore() == 2){
+                    String searchedName = (ChatColor.RED+"Zniszczone krysztaly: "+ChatColor.GOLD+HiplayDragon.instance.destroyedCrystalList.size());
+                    if(name != searchedName){
+                        HiplayDragon.instance.objective.getScoreboard().resetScores(name);
+                        HiplayDragon.instance.objective.getScore(searchedName).setScore(2);
                     }
                 }
 
             }
         }
-            main.gameCfg.setUpdateScoreboard(false);
+        HiplayDragon.instance.gameCfg.setUpdateScoreboard(false);
     }
 
 }
