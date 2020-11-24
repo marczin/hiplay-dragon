@@ -5,10 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Score;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
+import org.bukkit.scoreboard.*;
 import pl.marcinrosol.HiplayDragon.commands.*;
 import pl.marcinrosol.HiplayDragon.entities.CrystalCfg;
 import pl.marcinrosol.HiplayDragon.entities.DestroyedCrystal;
@@ -28,9 +25,9 @@ public class HiplayDragon extends JavaPlugin {
     public FileConfiguration config = getConfig();
     public GameCfg gameCfg;
     public List<DestroyedCrystal> destroyedCrystalList = new CopyOnWriteArrayList<>();
-    public ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
-    public Scoreboard scoreboard = scoreboardManager.getMainScoreboard();
-    public Objective objective = scoreboard.registerNewObjective("DragonBoard", "");
+    public ScoreboardManager scoreboardManager;
+    public Scoreboard scoreboard;
+    public Objective objective;
 
     @Override
     public void onEnable() {
@@ -68,6 +65,11 @@ public class HiplayDragon extends JavaPlugin {
     }
 
     private void prepareScoreboard(){
+        this.scoreboardManager = Bukkit.getScoreboardManager();
+        this.scoreboard = scoreboardManager.getMainScoreboard();
+        this.objective = scoreboard.registerNewObjective("DragonBoard", "dummy");
+        objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+        objective.setDisplayName("HiPlay Dragon event");
         Score mobKilled = objective.getScore(ChatColor.RED + "Mob killed: "+(gameCfg.getMobProgress()-1));
         mobKilled.setScore(1);
     }
