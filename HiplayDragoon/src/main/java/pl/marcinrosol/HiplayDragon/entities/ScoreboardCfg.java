@@ -11,12 +11,12 @@ public class ScoreboardCfg {
     public static void prepareScoreboard(){
         Scoreboard scoreboard =  Bukkit.getScoreboardManager().getMainScoreboard();
         HiplayDragon.instance.objective = scoreboard.getObjective("dragonboard");
+        if(HiplayDragon.instance.objective != null ) HiplayDragon.instance.objective.unregister();
         if(HiplayDragon.instance.objective == null ){
             HiplayDragon.instance.objective = scoreboard.registerNewObjective("dragonboard", "dummy");
             HiplayDragon.instance.objective.setDisplaySlot(DisplaySlot.SIDEBAR);
             HiplayDragon.instance.objective.setDisplayName("HiPlay");
         }
-        HiplayDragon.instance.objective.unregister();
         updateScoreboard();
     }
 
