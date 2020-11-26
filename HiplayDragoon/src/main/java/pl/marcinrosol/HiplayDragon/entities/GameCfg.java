@@ -11,6 +11,8 @@ public class GameCfg{
     DragonMode dragonMode;
     int howManyMobKill;
     boolean updateScoreboard;
+    public int countTaskId;
+    public int countTime;
 
     public GameCfg() {
         this.mobProgress = 1;
@@ -20,6 +22,24 @@ public class GameCfg{
         this.dragonMode = DragonMode.valueOf(HiplayDragon.instance.config.getString("event.dragonMode"));
         this.howManyMobKill = HiplayDragon.instance.config.getInt("event.howManyMobKill")+1;
         this.updateScoreboard = true;
+        this.countTaskId = 0;
+        this.countTime = 60;
+    }
+
+    public int getCountTime() {
+        return countTime;
+    }
+
+    public void setCountTime(int countTime) {
+        this.countTime = countTime;
+    }
+
+    public int getCountTaskId() {
+        return countTaskId;
+    }
+
+    public void setCountTaskId(int countTaskId) {
+        this.countTaskId = countTaskId;
     }
 
     public boolean isUpdateScoreboard() {

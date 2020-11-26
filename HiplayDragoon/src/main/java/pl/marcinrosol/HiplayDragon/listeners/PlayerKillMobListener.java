@@ -39,6 +39,7 @@ public class PlayerKillMobListener implements Listener {
                 HiplayDragon.instance.gameCfg.setDragonMode(DragonMode.DRAGON);
                 Bukkit.broadcastMessage("change mode");
                 DragonModeTask.dragonKillTask(); // run task that will change mode to MOD after 1 minute
+                DragonModeTask.setTimerTask();
             }
         }
     }

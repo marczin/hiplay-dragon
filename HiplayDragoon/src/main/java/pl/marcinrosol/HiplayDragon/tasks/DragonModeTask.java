@@ -1,7 +1,9 @@
 package pl.marcinrosol.HiplayDragon.tasks;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import pl.marcinrosol.HiplayDragon.HiplayDragon;
 import pl.marcinrosol.HiplayDragon.entities.DragonMode;
@@ -19,23 +21,26 @@ public final class DragonModeTask {
     }
 
     public static void setTimerTask(){
+        HiplayDragon.instance.gameCfg.countTime = 60;
         Bukkit.getServer().getOnlinePlayers().stream().forEach(p -> p.setLevel(60));
-        BukkitTask taskid = null;
-
-        taskid = Bukkit.getScheduler().runTaskTimer(HiplayDragon.instance, () -> {
-            int currentLevel = 60 ;
-
+        BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
+        HiplayDragon.instance.gameCfg.countTaskId = scheduler.scheduleSyncRepeatingTask(HiplayDragon.instance,
+                new Runnable() {
             @Override
-            public void run(){
-                for (Player player : Bukkit.getServer().getOnlinePlayers()){
-                    player.setLevel(currentLevel);
+            public void run() {
+                Bukkit.getServer().getOnlinePlayers().stream().forEach(p -> p.setLevel(HiplayDragon.instance.gameCfg.getCountTime()));
+                if(HiplayDragon.instance.gameCfg.getCountTime() <= 0) {
+                    Bukkit.broadcastMessage(ChatColor.RED + "Time is up!");
+                    stopTimer();
+                    return;
                 }
-            };
-
-            if(currentLevel <= 0){
-                Bukkit.getScheduler().cancelTask(taskid.getTaskId());
+            HiplayDragon.instance.gameCfg.countTime--;
             }
-            currentLevel --;
-        }, 0, 20L);
+        }, 0L, 20L);
     }
+
+    public static void stopTimer() {
+        Bukkit.getScheduler().cancelTask(HiplayDragon.instance.gameCfg.countTaskId);
+    }
+
 }
