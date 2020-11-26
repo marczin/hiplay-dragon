@@ -13,12 +13,12 @@ public class GameCfg{
     boolean updateScoreboard;
 
     public GameCfg() {
-        this.mobProgress = HiplayDragon.instance.config.getInt("event.killMobProgress");
+        this.mobProgress = 1;
         this.maxMobKillProgress = HiplayDragon.instance.config.getInt("event.max");
         this.maxDragonHealth = HiplayDragon.instance.config.getInt("event.maxDragonHealth");
         this.dragonName = HiplayDragon.instance.config.getString("event.dragonName");
         this.dragonMode = DragonMode.valueOf(HiplayDragon.instance.config.getString("event.dragonMode"));
-        this.howManyMobKill = HiplayDragon.instance.config.getInt("event.howManyMobKill");
+        this.howManyMobKill = HiplayDragon.instance.config.getInt("event.howManyMobKill")+1;
         this.updateScoreboard = true;
     }
 

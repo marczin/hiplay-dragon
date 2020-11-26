@@ -14,10 +14,8 @@ public class DragonGetDamageListener implements Listener {
     public void dragonGetDamage(EntityDamageEvent event){
         if(event.getEntity() instanceof EnderDragon){
             if(HiplayDragon.instance.gameCfg.getDragonMode() == DragonMode.DRAGON){
-                HiplayDragon.instance.gameCfg.incrementMobProgress();
                 EnderDragon enderDragon = (EnderDragon) event.getEntity();
                 Bukkit.broadcastMessage(String.valueOf(enderDragon.getHealth()));
-                PlayerKillMobListener.changeMode();
             }else{
                 event.setCancelled(true);
             }

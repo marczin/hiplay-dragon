@@ -1,7 +1,6 @@
 message:
     hello: witamy na serwerze hiplay
 event:
-    killMobProgress: 1
     max: 10
     maxDragonHealth: 200
     dragonName: Kiedy HiPlay
